@@ -142,11 +142,13 @@ class PublishHandler(BaseHandler):
             location.address = self._extract_address(location.latitude, location.longitude)
         elif reporter == Reporter.OVERLAND:
             for loc in self.data['locations']:
+                print(loc)
                 if loc['type'] == 'Feature':
                     props = loc['properties']
                     d = datetime.datetime.strptime(props['timestamp'], "%Y-%m-%dT%H:%M:%SZ")
                     location.timestamp = (d - datetime.datetime.utcfromtimestamp(0)).total_seconds()
-                    location.accuracy = props['horizontal_accuracy']
+                    if 'horizontal_accuracy' in props:
+                        location.accuracy = props['horizontal_accuracy']
                     location.battery = int(round(props['battery_level'] * 100))
 
                     geometry = loc['geometry']
