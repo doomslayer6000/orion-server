@@ -1,3 +1,8 @@
+from enum import Enum
+
+Reporter = Enum('Reporter', 'OWNTRACKS OVERLAND UNKNOWN')
+
+
 class BaseHandler(object):
     """
     Base endpoint logic handler.
@@ -18,7 +23,7 @@ class BaseHandler(object):
         self.ctx = ctx
         self.data = data
 
-    def success(self, data={}, status=200):
+    def success(self, data={}, status=200, reporter=Reporter.OWNTRACKS):
         """
         Return to the client with a success response.
 
@@ -26,11 +31,15 @@ class BaseHandler(object):
         :param status: Optional HTTP status code to attach to the response.
         :return: A tuple of (response JSON, status code).
         """
-        return {
-            'success': True,
-            'message': None,
-            'data': data,
-        }, status
+        if reporter == Reporter.OVERLAND:
+            return data, status
+
+        if reporter == Reporter.OWNTRACKS:
+            return {
+                'success': True,
+                'message': None,
+                'data': data,
+            }, status
 
     def error(self, data={}, status=500, message='Something went wrong.'):
         """

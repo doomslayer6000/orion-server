@@ -1,7 +1,7 @@
 import json
 import os
 
-DEFAULT_CONFIG_PATH = '/etc/orion/config.json'
+DEFAULT_CONFIG_PATH = '/srv/orion-server/config.json'
 
 
 def _get_recursive_config_key(config, key):
