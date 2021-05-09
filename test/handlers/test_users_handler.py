@@ -34,8 +34,8 @@ class TestUsersHandler(TestCase):
         self.assertEqual(
             resp['data'],
             [
-                {'user': 'user2', 'devices': ['device4', 'device5']},
                 {'user': 'user1', 'devices': ['device1', 'device2', 'device3']},
+                {'user': 'user2', 'devices': ['device4', 'device5']},
             ],
         )
 

@@ -19,7 +19,7 @@ def DbClient(app, user, password, host, port, name):
     :param name: The name of the MySQL database.
     :return: A SQLAlchemy object for interacting with the database.
     """
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://{user}:{password}@{host}:{port}/{name}'.format(
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqldb://{user}:{password}@{host}:{port}/{name}'.format(
         user=user,
         password=password,
         host=host,
