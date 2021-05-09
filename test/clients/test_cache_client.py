@@ -1,7 +1,8 @@
 import redis
 from redis.exceptions import ConnectionError
 from unittest import TestCase
-import mock
+import unittest.mock as mock
+
 import time
 
 from orion.clients import cache

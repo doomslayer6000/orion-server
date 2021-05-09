@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-import mock
+import unittest.mock as mock
 
 from orion.util.request import require_params
 

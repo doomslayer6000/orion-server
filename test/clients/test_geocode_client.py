@@ -1,7 +1,7 @@
 from unittest import TestCase
 
 import requests
-import mock
+import unittest.mock as mock
 
 from orion.clients.geocode import ReverseGeocodingClient
 

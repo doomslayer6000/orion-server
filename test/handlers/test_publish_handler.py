@@ -1,7 +1,7 @@
 from unittest import TestCase
 
 import flask
-import mock
+import unittest.mock as mock
 
 from orion.clients.cache import CacheClient
 from orion.handlers.publish_handler import PublishHandler

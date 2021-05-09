@@ -1,7 +1,7 @@
 import time
 from unittest import TestCase
 
-import mock
+import unittest.mock as mock
 
 from orion.handlers.locations_handler import LocationsHandler
 from orion.handlers.locations_handler import NUM_SEC_MONTH

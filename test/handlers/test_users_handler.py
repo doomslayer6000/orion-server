@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-import mock
+import unittest.mock as mock
 
 from orion.handlers.users_handler import UsersHandler
 from orion.models.location import Location

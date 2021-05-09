@@ -1,7 +1,7 @@
 from unittest import TestCase
 
 import flask_sqlalchemy
-import mock
+import unittest.mock as mock
 
 from orion.clients.db import DbClient
 

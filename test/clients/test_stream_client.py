@@ -1,7 +1,7 @@
 from unittest import TestCase
 
 import kafka
-import mock
+import unittest.mock as mock
 
 from orion.clients.stream import NoopProducer
 from orion.clients.stream import StreamClient

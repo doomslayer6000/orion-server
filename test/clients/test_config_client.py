@@ -2,7 +2,7 @@ import json
 import os
 from unittest import TestCase
 
-import mock
+from unittest import mock
 
 from orion.clients.config import ConfigClient
 from orion.clients.config import ConfigParam
@@ -48,7 +48,7 @@ class TestConfigUtils(TestCase):
         self.assertIsNone(_get_recursive_config_key({}, ['unknown']))
 
     @mock.patch(
-        '__builtin__.open'.format(__name__),
+        'builtins.open'.format(__name__),
         mock.mock_open(read_data=json.dumps(mock_required_config)),
         create=True,
     )
@@ -81,7 +81,7 @@ class TestConfigClient(TestCase):
             if param.key in os.environ:
                 del os.environ[param.key]
 
-    @mock.patch('__builtin__.open'.format(__name__))
+    @mock.patch('builtins.open'.format(__name__))
     def test_all_required_in_env(self, mock_open):
         os.environ.update({
             'DATABASE_HOST': 'env_localhost',
@@ -102,7 +102,7 @@ class TestConfigClient(TestCase):
         self.assertEqual(instance.get_value('frontend_url'), '*')
 
     @mock.patch(
-        '__builtin__.open'.format(__name__),
+        'builtins.open'.format(__name__),
         mock.mock_open(read_data=json.dumps(mock_required_config)),
         create=True,
     )
@@ -121,7 +121,7 @@ class TestConfigClient(TestCase):
         self.assertEqual(instance.get_value('database.password'), 'env_password')
 
     @mock.patch(
-        '__builtin__.open'.format(__name__),
+        'builtins.open'.format(__name__),
         mock.mock_open(read_data=json.dumps(mock_required_config)),
         create=True,
     )
@@ -135,7 +135,7 @@ class TestConfigClient(TestCase):
         )
 
     @mock.patch(
-        '__builtin__.open'.format(__name__),
+        'builtins.open'.format(__name__),
         mock.mock_open(read_data=json.dumps(dict(mock_required_config, **mock_optional_config))),
         create=True,
     )
@@ -147,7 +147,7 @@ class TestConfigClient(TestCase):
         self.assertEqual(instance.get_value('kafka.topic'), 'topic')
 
     @mock.patch(
-        '__builtin__.open'.format(__name__),
+        'builtins.open'.format(__name__),
         mock.mock_open(read_data=json.dumps(mock_required_config)),
         create=True,
     )

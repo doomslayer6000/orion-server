@@ -2,6 +2,7 @@ import collections
 
 from orion.handlers.base_handler import BaseHandler
 from orion.models.location import Location
+from functools import reduce
 
 
 class UsersHandler(BaseHandler):
@@ -22,7 +23,7 @@ class UsersHandler(BaseHandler):
         # Reshape from a map of user -> device to an array containing objects with user and devices
         formatted_user_devices = [
             {'user': user, 'devices': devices}
-            for user, devices in user_devices.iteritems()
+            for user, devices in user_devices.items()
         ]
 
         self.ctx.metrics_event.emit_event('query_users')

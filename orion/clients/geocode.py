@@ -1,4 +1,4 @@
-import urllib
+import urllib.parse
 
 import requests
 
@@ -59,7 +59,7 @@ class ReverseGeocodingClient(object):
             url='https://api.mapbox.com/geocoding/v5/{mode}/{query}.json?{qs}'.format(
                 mode=mode,
                 query=query,
-                qs=urllib.urlencode(dict(self._default_params, **params)),
+                qs=urllib.parse.urlencode(dict(self._default_params, **params)),
             ),
         )
 

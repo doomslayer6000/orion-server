@@ -13,7 +13,7 @@ def db_init():
     app = create_app()
     BaseModel.metadata.create_all(bind=app.ctx.db.engine)
 
-    print 'Database initialized successfully.'
+    print('Database initialized successfully.')
 
 
 if __name__ == '__main__':
