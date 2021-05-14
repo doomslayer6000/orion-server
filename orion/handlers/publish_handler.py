@@ -140,9 +140,29 @@ class PublishHandler(BaseHandler):
             location.longitude = self.data.get('lon')
 
             location.address = self._extract_address(location.latitude, location.longitude)
+            with self.ctx.metrics_latency.profile('db.write_ms'):
+                self.ctx.db.session.add(location)
+                self.ctx.db.session.commit()
+
+            self.ctx.stream.emit_location(location)
+
+            self.ctx.metrics_event.emit_event(
+                'publish_location', {'user': location.user, 'device': location.device})
         elif reporter == Reporter.OVERLAND:
             for loc in self.data['locations']:
-                print(loc)
+                location = Location(
+                    timestamp=0,
+                    user=None,
+                    device=None,
+                    latitude=0.0,
+                    longitude=0.0,
+                    accuracy=0,
+                    battery=0,
+                    trigger=None,
+                    connection=None,
+                    tracker_id=None,
+                    address=None
+                )
                 if loc['type'] == 'Feature':
                     props = loc['properties']
                     # TODO: Support trip recording
@@ -170,14 +190,14 @@ class PublishHandler(BaseHandler):
                             location.device = props['device_id']
                             location.user = 'anon'
 
-        with self.ctx.metrics_latency.profile('db.write_ms'):
-            self.ctx.db.session.add(location)
-            self.ctx.db.session.commit()
+                    with self.ctx.metrics_latency.profile('db.write_ms'):
+                        self.ctx.db.session.add(location)
+                        self.ctx.db.session.commit()
 
-        self.ctx.stream.emit_location(location)
+                    self.ctx.stream.emit_location(location)
 
-        self.ctx.metrics_event.emit_event(
-            'publish_location', {'user': location.user, 'device': location.device})
+                    self.ctx.metrics_event.emit_event(
+                        'publish_location', {'user': location.user, 'device': location.device})
 
         if reporter == Reporter.OVERLAND:
             response['result'] = 'ok'
