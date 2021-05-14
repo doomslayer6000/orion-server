@@ -145,6 +145,13 @@ class PublishHandler(BaseHandler):
                 print(loc)
                 if loc['type'] == 'Feature':
                     props = loc['properties']
+                    # TODO: Support trip recording
+                    if 'type' in props and props["type"] == "trip":
+                        response['result'] = 'ok'
+                        response['saved'] = 0
+                        response['trips'] = 1
+                        return self.success(data=response, status=200, reporter=Reporter.OVERLAND)
+
                     d = datetime.datetime.strptime(props['timestamp'], "%Y-%m-%dT%H:%M:%SZ")
                     location.timestamp = (d - datetime.datetime.utcfromtimestamp(0)).total_seconds()
                     if 'horizontal_accuracy' in props:
