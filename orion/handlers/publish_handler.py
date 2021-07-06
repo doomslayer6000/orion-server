@@ -177,7 +177,8 @@ class PublishHandler(BaseHandler):
                     if 'horizontal_accuracy' in props:
                         location.accuracy = props['horizontal_accuracy']
                     location.battery = int(round(props['battery_level'] * 100))
-
+                    if 'geometry' not in loc:
+                        continue
                     geometry = loc['geometry']
                     location.longitude = geometry['coordinates'][0]
                     location.latitude = geometry['coordinates'][1]
