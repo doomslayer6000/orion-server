@@ -3,12 +3,10 @@ SQLAlchemy==1.4.14
 Flask_Cors==3.0.10
 redis==3.5.3
 kafka_python==2.0.2
-Flask==1.1.2
+Flask==2.2.2
 requests==2.25.1
 raven==6.10.0
 mock==4.0.3
 dogstatsd_python==0.5.6
 blinker==1.4.0
 mysqlclient==2.0.3
-jinja2<3.1.0
-itsdangerous==2.0.1
